@@ -1,4 +1,4 @@
-package gui;
+package model;
 
 import controller.CodeGeneratorController;
 import org.mdkt.compiler.InMemoryJavaCompiler;
@@ -6,15 +6,19 @@ import org.mdkt.compiler.InMemoryJavaCompiler;
 import java.util.Map;
 
 public class MethodTester {
+    private int number;
     private String code;
     private String className;
     private String methodName;
 
-    public MethodTester(String code, String className, String methodName) {
+    public MethodTester(int number,String code, String className, String methodName) {
+        this.number = number;
         this.code = code;
         this.className = className;
         this.methodName = methodName;
     }
+
+    public void runTe
 
     public String runMethodAndReturnResult() {
         String finalCode = CodeGeneratorController.generateCodeFile(code);

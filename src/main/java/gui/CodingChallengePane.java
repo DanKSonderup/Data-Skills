@@ -15,9 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.junit.Test;
-import org.junit.internal.TextListener;
-import org.junit.runner.JUnitCore;
+import model.MethodTester;
 import org.junit.runner.Result;
 
 public class CodingChallengePane extends Application {
