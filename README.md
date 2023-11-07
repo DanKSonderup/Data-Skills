@@ -9,7 +9,7 @@ Programmet kan mangle emner alt efter hvilken uddannelsesinstution du går på.
 Koden er åben og du er velkommen til selv at fork og selv bygge dit eget code assesment program.
 
 # Hvordan skal programmet benyttes?
-Fork repository til din egen github eller download coden som Zip fil. \n
-Åben projektet i IntelliJ \n
+Fork repository til din egen github eller download coden som Zip fil. <br> 
+Åben projektet i IntelliJ <br>
 Gør App.java filen.
 
