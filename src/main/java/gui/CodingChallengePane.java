@@ -1,6 +1,6 @@
 package gui;
 
-import eu.mihosoft.monacofx.EditorTheme;
+
 import eu.mihosoft.monacofx.MonacoFX;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -9,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.junit.Test;
 import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -28,13 +30,8 @@ public class CodingChallengePane extends Application {
 
         String code = """
                 public class A {
-                public int power(int n, int p) {
-                // DO NOT CHANGE ANYTHING ABOVE THIS
-                        if (p == 0) {
-                            return 1;
-                        } else {
-                            return power(n,(p-1)) * n;
-                        }
+                  public int power(int n, int p) {
+                        return 20;
                     }
                 }
                 """;
@@ -44,8 +41,8 @@ public class CodingChallengePane extends Application {
         // use a predefined language like 'c'
         monacoFX.getEditor().setCurrentLanguage("java");
         monacoFX.getEditor().setCurrentTheme("vs-dark");
-        monacoFX.setMaxHeight(600);
-        monacoFX.setMaxWidth(600);
+        monacoFX.setMaxHeight(800);
+        monacoFX.setMaxWidth(1200);
         stage.setTitle("DataSkills");
 
         GridPane mainPane = new GridPane();
@@ -75,9 +72,10 @@ public class CodingChallengePane extends Application {
     }
 
     //-----------------------------------------------------------
-    // Data felter til right pane
+    // Data felter til Right pane
 
     private final Button btnSubmit = new Button("Submit solution");
+
     private void initContentRightPane(GridPane pane) {
         // show or hide grid lines
         pane.setGridLinesVisible(false);
@@ -104,6 +102,7 @@ public class CodingChallengePane extends Application {
 
     //-----------------------------------------------------------
     // DATA FELTER TIL LEFT PANE
+    private final TextArea codeErrors = new TextArea();
 
     private void initContentLeftPane(GridPane pane) {
         // show or hide grid lines
@@ -115,16 +114,21 @@ public class CodingChallengePane extends Application {
         // set vertical gap between components
         pane.setVgap(10);
 
+        codeErrors.setEditable(false);
+
         HBox codingbox = new HBox();
         codingbox.getChildren().add(monacoFX);
         pane.add(codingbox,0,0);
+        pane.add(btnSubmit,0,2);
+        pane.add(codeErrors,0,1);
+
+        btnSubmit.setOnAction(event -> onSubmitAction());
     }
 
 
     public void onSubmitAction() {
-        JUnitCore junit = new JUnitCore();
-        junit.addListener(new TextListener(System.out));
-        junit.run(TestRekursion1Opg1.class);
+        MethodTester mt = new MethodTester(monacoFX.getEditor().getDocument().getText(), "A", "power");
+        codeErrors.setText(mt.runMethodAndReturnResult());
     }
 
     public static void resultReport(Result result) {

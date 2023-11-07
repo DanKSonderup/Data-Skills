@@ -1,0 +1,8 @@
+public boolean test1() {
+    return power(3,8) == 6561;
+}
+
+public boolean test2() {
+    return power(2,7) == 128;
+}
+}
